@@ -1,0 +1,57 @@
+/* Cascade Rocks — Design Tokens
+   Source of truth: ARCHITECTURE.md §3, BLUEPRINT.md §2
+   Static brand tokens only. Temporal light-stage values are computed at
+   runtime by lib/motion/useTimeOfDay.ts — see that file for the five
+   light-stage anchor rows (morning-mist / midday-clarity / golden-hour /
+   dusk / evening), which are intentionally NOT duplicated here as CSS
+   so there is exactly one source of truth for those numbers. */
+
+:root {
+  /* Base palette — BLUEPRINT.md §2.1 */
+  --color-ink: #1a1714;
+  --color-mist: #f4f1ea;
+  --color-moss: #5c6b52;
+  --color-bark: #6b5849;
+  --color-stone: #b8b2a6;
+  --color-overlay: rgba(26, 23, 20, 0.45);
+
+  /* Fonts — assigned by next/font in app/layout.tsx */
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-inter);
+
+  /* Fluid type scale — BLUEPRINT.md §2.3 */
+  --text-hero: clamp(3.5rem, 12vw, 9rem);
+  --text-headline: clamp(2.25rem, 6vw, 4.5rem);
+  --text-body-lg: clamp(1.125rem, 1.5vw, 1.375rem);
+  --text-body: 1rem;
+  --text-caption: 0.8125rem;
+
+  /* Spacing — BLUEPRINT.md §2.4 */
+  --space-scene-y: clamp(8rem, 16vh, 14rem);
+  --space-gutter: clamp(1.25rem, 5vw, 4rem);
+
+  /* Motion — BLUEPRINT.md §2.4 */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-scene: 1.1s;
+  --duration-micro: 0.4s;
+
+  /* Z-index tiers — ARCHITECTURE.md §3.3 */
+  --z-scene: 1;
+  --z-light-layer: 5;
+  --z-chrome: 10;
+  --z-overlay: 20;
+
+  /* Temporal light system — written per-frame by the global ScrollTrigger
+     in components/experience/LightProgressionLayer.tsx. Declared here with
+     neutral defaults so SSR/first-paint never flashes unstyled. */
+  --light-progress: 0;
+  --scrim-color: 201 210 214; /* morning-mist tint, as r g b */
+  --scrim-opacity: 0.2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-scene: 0.01s;
+    --duration-micro: 0.01s;
+  }
+}

@@ -1,26 +1,130 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Expose CSS-variable tokens as Tailwind utilities (Tailwind v4 CSS-config) */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--color-ink);
+  --color-mist: var(--color-mist);
+  --color-moss: var(--color-moss);
+  --color-bark: var(--color-bark);
+  --color-stone: var(--color-stone);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --text-hero: var(--text-hero);
+  --text-headline: var(--text-headline);
+  --text-body-lg: var(--text-body-lg);
+  --text-body: var(--text-body);
+  --text-caption: var(--text-caption);
+  --spacing-scene-y: var(--space-scene-y);
+  --spacing-gutter: var(--space-gutter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--color-mist);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Lenis owns scroll; native overscroll glow/bounce fights the smoothing */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  margin: 0;
+  font-weight: 500;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-body);
+}
+
+/* Accessible, on-brand focus ring — never removed, only restyled.
+   ARCHITECTURE.md §13: thin moss-colored outline. */
+:focus-visible {
+  outline: 2px solid var(--color-moss);
+  outline-offset: 3px;
+}
+
+/* CustomCursor (Milestone 7) hides the native cursor on capable desktop
+   pointers only; this class is toggled by JS feature-detection, never by
+   a blanket CSS rule, so touch/reduced-motion visitors keep the native cursor. */
+.cursor-none-desktop {
+  cursor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* SceneFog (components/primitives/SceneFog.tsx) — Atmospheric Drift */
+.cascade-fog-blob {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  filter: blur(60px);
+  background: radial-gradient(circle, rgb(var(--scrim-color) / 0.35), transparent 70%);
+  will-change: transform;
+}
+
+.cascade-fog-blob--a {
+  top: -10%;
+  left: -10%;
+  animation: cascade-fog-drift-a 50s ease-in-out infinite alternate;
+}
+
+.cascade-fog-blob--b {
+  bottom: -15%;
+  right: -10%;
+  animation: cascade-fog-drift-b 65s ease-in-out infinite alternate;
+}
+
+@keyframes cascade-fog-drift-a {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(8%, 6%);
+  }
+}
+
+@keyframes cascade-fog-drift-b {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-6%, -8%);
+  }
 }
