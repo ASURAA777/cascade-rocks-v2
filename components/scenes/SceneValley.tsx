@@ -8,20 +8,11 @@ import { SceneFog } from "@/components/primitives/SceneFog";
 
 const scene = getSceneById("valley")!;
 
-/**
- * Scene 02 — Discover The Valley. Scene Travel, pinned, 2D parallax (no
- * R3F — ARCHITECTURE.md Risk note: 2D layers are "likely sufficient"
- * here, confirmed in BLUEPRINT.md §9 Open Items). The four short lines
- * stagger in as a real scrubbed GSAP timeline, not a viewport reveal —
- * DESIGN.md §5: "map-like, calm, oriented" pacing.
- */
 export function SceneValley() {
   const ref = useScrollScene<HTMLElement>(({ root, gsap }) => {
     registerSceneActivation(root, "valley");
-
     const lines = root.querySelectorAll<HTMLElement>("[data-valley-line]");
     const bg = root.querySelector<HTMLElement>("[data-valley-bg]");
-
     gsap.timeline({
       scrollTrigger: {
         trigger: root,
@@ -41,20 +32,17 @@ export function SceneValley() {
       ref={ref}
       id="valley"
       aria-labelledby="valley-heading"
-      className="relative h-screen w-full overflow-hidden bg-stone text-ink"
+      className="relative h-screen w-full overflow-hidden bg-stone text-mist"
     >
       <div data-valley-bg className="absolute inset-0">
         <MediaSlot id="valley.flyover" sizes="100vw" className="object-cover" />
       </div>
+      <div aria-hidden="true" className="absolute inset-0 bg-ink/55" />
       <SceneFog />
-
-      <h2 id="valley-heading" className="sr-only">
-        {scene.headline}
-      </h2>
-
+      <h2 id="valley-heading" className="sr-only">{scene.headline}</h2>
       <div className="relative z-[var(--z-chrome)] flex h-full flex-col items-center justify-center gap-4 px-gutter text-center">
         {scene.body?.map((line) => (
-          <p key={line} data-valley-line className="text-headline font-display text-ink">
+          <p key={line} data-valley-line className="text-headline font-display text-mist">
             {line}
           </p>
         ))}

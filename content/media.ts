@@ -27,8 +27,8 @@ export const media: Record<string, MediaSlot> = {
   "valley.flyover": {
     id: "valley.flyover",
     type: "image",
-    src: "/media/experiences/valley-tea-view.jpg",
-    alt: "Wide tea-terrace landscape receding into morning mist toward Ooty and Coonoor",
+    src: "/media/valley/bonfire-hillside.jpg",
+    alt: "Bonfire on the hillside at Cascade Rocks, Nilgiri Hills",
     credit: "placeholder",
   },
 
@@ -97,16 +97,16 @@ export const media: Record<string, MediaSlot> = {
   "table.chef": {
     id: "table.chef",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
-    alt: "Chef Subrata Pandey's hands plating a dish, steam rising",
+    src: "/media/table/tea-service-deck.jpg",
+    alt: "Tea service on the estate deck, steam rising from fresh cups",
     credit: "placeholder",
   },
 
   "table.dish": {
     id: "table.dish",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
-    alt: "Close detail of a plated dish catching golden-hour light",
+    src: "/media/experiences/valley-tea-view.jpg",
+    alt: "Valley tea view from the estate deck",
     credit: "placeholder",
   },
 

@@ -189,7 +189,7 @@ export const scenes: SceneContent[] = [
     anchor: "#book",
     label: "Book Your Stay",
     lightStage: "evening",
-    headline: "Your Nilgiri Escape Awaits",
+    headline: "Cascade Rocks Awaits",
     subheadline: "Carry this calm into your stay.",
     mediaSlots: ["book.hero"],
     motionPrimitive: "scene-travel",
