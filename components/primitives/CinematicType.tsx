@@ -1,19 +1,9 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import { EASE_CINEMATIC_BEZIER, DURATION } from "@/lib/motion/easing";
+import { useScrollScene } from "@/lib/motion/useScrollScene";
+import { EASE_CINEMATIC, DURATION } from "@/lib/motion/easing";
 
-const TAGS = {
-  h1: motion.h1,
-  h2: motion.h2,
-  h3: motion.h3,
-  p: motion.p,
-} as const;
-
-const reveal: Variants = {
-  hidden: { opacity: 0, y: "0.4em", clipPath: "inset(0 0 100% 0)" },
-  shown: { opacity: 1, y: "0em", clipPath: "inset(0 0 0% 0)" },
-};
+const TAGS = { h1: "h1", h2: "h2", h3: "h3", p: "p" } as const;
 
 interface CinematicTypeProps {
   as?: keyof typeof TAGS;
@@ -23,27 +13,65 @@ interface CinematicTypeProps {
   delay?: number;
 }
 
+const HIDDEN_STYLE: React.CSSProperties = {
+  opacity: 0,
+  transform: "translateY(0.4em)",
+  clipPath: "inset(0 0 100% 0)",
+};
+
 /**
- * Editorial Reveal — ARCHITECTURE.md §4.2 primitive 3. A held title-card
- * reveal triggered by entering the viewport (a discrete event, not
- * scroll-scrubbed) — the correct Framer Motion use case per BLUEPRINT.md
- * §1's GSAP/Framer division of labor. `prefers-reduced-motion` is
- * handled globally via <MotionConfig reducedMotion="user"> in Experience.
+ * Editorial Reveal — ARCHITECTURE.md §4.2 primitive 3.
+ *
+ * Originally built on Framer Motion's `whileInView` per BLUEPRINT.md §1's
+ * "discrete viewport-entry events are Framer Motion's job" rule. A live
+ * browser audit found it never fires on this page — confirmed with a
+ * manual IntersectionObserver test that also returned ratio:0 for a
+ * definitely-on-screen sanity element (the persistent CTA), reproduced in
+ * both headless and headed real Chromium — leaving every headline
+ * permanently stuck at its hidden state. Rebuilt on GSAP ScrollTrigger
+ * (`once: true`, not scrubbed — still a discrete trigger, not continuous
+ * motion) instead, since that mechanism is proven reliable everywhere
+ * else on this page (every pin/parallax effect already depends on it).
+ * `prefers-reduced-motion` is checked directly rather than via
+ * <MotionConfig> since this primitive no longer uses Framer Motion.
  */
 export function CinematicType({ as = "h2", id, children, className, delay = 0 }: CinematicTypeProps) {
-  const Component = TAGS[as];
+  const Tag = TAGS[as];
+
+  const ref = useScrollScene<HTMLElement>(({ root, gsap, ScrollTrigger }) => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      gsap.set(root, { opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" });
+      return;
+    }
+
+    ScrollTrigger.create({
+      trigger: root,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.to(root, {
+          opacity: 1,
+          y: 0,
+          clipPath: "inset(0 0 0% 0)",
+          duration: DURATION.scene,
+          delay,
+          ease: EASE_CINEMATIC,
+        });
+      },
+    });
+  });
 
   return (
-    <Component
+    <Tag
+      // Safe: useScrollScene<HTMLElement> covers every tag this primitive renders.
+      ref={ref as unknown as React.Ref<HTMLHeadingElement>}
       id={id}
       className={className}
-      variants={reveal}
-      initial="hidden"
-      whileInView="shown"
-      viewport={{ once: true, amount: 0.6 }}
-      transition={{ duration: DURATION.scene, ease: EASE_CINEMATIC_BEZIER, delay }}
+      style={HIDDEN_STYLE}
     >
       {children}
-    </Component>
+    </Tag>
   );
 }

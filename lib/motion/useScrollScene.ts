@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type RefObject } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "./gsapConfig";
 
 type ScrollSceneBuilder<T extends HTMLElement> = (args: {
   root: T;

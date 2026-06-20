@@ -2,16 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-let pluginsRegistered = false;
-function ensurePlugins() {
-  if (!pluginsRegistered && typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-    pluginsRegistered = true;
-  }
-}
+import { gsap, ScrollTrigger } from "./gsapConfig";
 
 /**
  * Single scroll authority — BLUEPRINT.md §6. Lenis owns smooth scroll;
@@ -19,7 +10,12 @@ function ensurePlugins() {
  * ScrollTrigger.update. There is exactly one scroll authority on the
  * page — never native scroll, Lenis, and an independent rAF loop
  * competing. Mounted once, at the top of <Experience>.
+ *
+ * Plugin registration lives in ./gsapConfig (imported, not called here) —
+ * see that file for why registering inside this hook's own effect was a
+ * launch-blocking bug.
  */
+
 /**
  * Module-level singleton so any component (ChromeOverlay's Scene Index,
  * for instance) can drive scroll-to without prop-drilling the instance
@@ -31,8 +27,6 @@ export function useLenis() {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    ensurePlugins();
-
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;

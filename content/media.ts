@@ -20,73 +20,80 @@ export const media: Record<string, MediaSlot> = {
   "enter.hero": {
     id: "enter.hero",
     type: "image",
-    src: "/placeholders/gradients/morning-mist.svg",
+    src: "/media/enter/estate-sunrise.jpg",
     alt: "Misty hill valley at dawn, low horizon, the Nilgiri Hills not yet fully revealed",
     credit: "placeholder",
   },
   "valley.flyover": {
     id: "valley.flyover",
     type: "image",
-    src: "/placeholders/gradients/morning-mist.svg",
+    src: "/media/experiences/valley-tea-view.jpg",
     alt: "Wide tea-terrace landscape receding into morning mist toward Ooty and Coonoor",
     credit: "placeholder",
   },
+
   "private.gate": {
     id: "private.gate",
     type: "image",
-    src: "/placeholders/gradients/morning-mist.svg",
+    src: "/media/private/estate-entry.jpg",
     alt: "A closed estate gate in soft morning light, no one in frame",
     credit: "placeholder",
   },
+
   "private.veranda": {
     id: "private.veranda",
     type: "image",
-    src: "/placeholders/gradients/morning-mist.svg",
+    src: "/media/stories/veranda-view.jpg",
     alt: "An empty veranda chair overlooking the hills at dawn",
     credit: "placeholder",
   },
   "private.table": {
     id: "private.table",
     type: "image",
-    src: "/placeholders/gradients/morning-mist.svg",
+    src: "/media/table/community-hall.jpg",
     alt: "A long table set for many, empty of people, in clearing morning mist",
     credit: "placeholder",
   },
+
   "estate.overview": {
     id: "estate.overview",
     type: "image",
-    src: "/placeholders/gradients/midday-clarity.svg",
+    src: "/media/estate/estate-aerial-01.jpg",
     alt: "High aerial view of the estate: main house, courtyard, waterfall and lawn seen as one",
     credit: "placeholder",
   },
+
   "stay.bedroom": {
     id: "stay.bedroom",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/stay/bedroom-premium.jpg",
     alt: "Warm late-afternoon light across a queen bedroom corner",
     credit: "placeholder",
   },
+
   "stay.living": {
     id: "stay.living",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/stay/cottage-exterior.jpg",
     alt: "A living room window framing the lawn in golden-hour light",
     credit: "placeholder",
   },
   "stay.bathroom": {
     id: "stay.bathroom",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/stay/bathroom-01.jpg",
     alt: "Bathroom detail with geyser, soft natural light",
     credit: "placeholder",
   },
+
   "stay.dining": {
     id: "stay.dining",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/stay/dining-hall.jpg",
     alt: "Glimpse through an open doorway into the dining hall",
     credit: "placeholder",
   },
+
   "table.chef": {
     id: "table.chef",
     type: "image",
@@ -94,6 +101,7 @@ export const media: Record<string, MediaSlot> = {
     alt: "Chef Subrata Pandey's hands plating a dish, steam rising",
     credit: "placeholder",
   },
+
   "table.dish": {
     id: "table.dish",
     type: "image",
@@ -101,52 +109,59 @@ export const media: Record<string, MediaSlot> = {
     alt: "Close detail of a plated dish catching golden-hour light",
     credit: "placeholder",
   },
+
   "table.hall": {
     id: "table.hall",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/table/community-hall.jpg",
     alt: "Empty dining hall table set for many, catching late light",
     credit: "placeholder",
   },
+
   "experiences.teaFactory": {
     id: "experiences.teaFactory",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/experiences/valley-tea-view.jpg",
     alt: "A hand brushing fresh tea leaves at the estate's tea factory",
     credit: "placeholder",
   },
+
   "experiences.waterfallTrek": {
     id: "experiences.waterfallTrek",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/experiences/waterfall-main.jpg",
     alt: "Bare feet crossing a brook on the waterfall trek",
     credit: "placeholder",
   },
+
   "experiences.brook": {
     id: "experiences.brook",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/experiences/valley-waterfall.jpg",
     alt: "A brook winding through the forest near the estate",
     credit: "placeholder",
   },
+
   "experiences.jamaraiForest": {
     id: "experiences.jamaraiForest",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/experiences/cottages-path.jpg",
     alt: "Canopy light filtering through the Jamarai Mini Forest Trek",
     credit: "placeholder",
   },
+
   "experiences.teaService": {
     id: "experiences.teaService",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/experiences/tea-service-deck.jpg",
     alt: "Tea poured at a quiet estate tea service, steam rising from the cup",
     credit: "placeholder",
   },
+
   "experiences.strawberryFarm": {
     id: "experiences.strawberryFarm",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/experiences/group-lawn-2.jpg",
     alt: "A strawberry held mid-pick, dew still on it, at the estate's strawberry farm",
     credit: "placeholder",
   },
@@ -157,61 +172,73 @@ export const media: Record<string, MediaSlot> = {
     alt: "Cool morning light inside the estate's cattle shed during milking",
     credit: "placeholder",
   },
+
   "experiences.bonfire": {
     id: "experiences.bonfire",
     type: "image",
-    src: "/placeholders/gradients/golden-hour.svg",
+    src: "/media/experiences/bonfire-circle.jpg",
     alt: "Smoke curling from an evening bonfire just beginning to catch",
     credit: "placeholder",
   },
+
   "nature.tree": {
     id: "nature.tree",
     type: "image",
-    src: "/placeholders/gradients/dusk.svg",
+    src: "/media/nature/estate-drone-wide.jpg",
     alt: "A single tree silhouette against a fading dusk sky",
     credit: "placeholder",
   },
+
   "comfort.lamp": {
     id: "comfort.lamp",
     type: "image",
-    src: "/placeholders/gradients/evening.svg",
+    src: "/media/comfort/cottages-evening.jpg",
     alt: "A single warm lamp beside a sofa in the evening",
     credit: "placeholder",
   },
+
   "comfort.lights": {
     id: "comfort.lights",
     type: "image",
-    src: "/placeholders/gradients/evening.svg",
+    src: "/media/comfort/disco-lights-main.jpg",
     alt: "Disco lights caught mid-pulse in the estate's dancing zone",
     credit: "placeholder",
   },
+
   "stories.veranda": {
     id: "stories.veranda",
     type: "image",
-    src: "/placeholders/gradients/evening.svg",
+    src: "/media/stories/veranda-view.jpg",
     alt: "A quiet veranda at evening, the hour for reflecting on a stay",
     credit: "placeholder",
   },
+
   "plan.lawn": {
     id: "plan.lawn",
     type: "image",
-    src: "/placeholders/gradients/evening.svg",
+    src: "/media/plan/group-lawn.jpg",
     alt: "The estate's large lawn under string and lamp light, set for a gathering",
     credit: "placeholder",
   },
+
   "book.hero": {
     id: "book.hero",
     type: "image",
-    src: "/placeholders/gradients/evening.svg",
+    src: "/media/book/bonfire-hillside.jpg",
     alt: "The estate at night: bonfire glow, lit windows, hills silhouetted against a darkening sky",
     credit: "placeholder",
   },
 };
-
 export function getMedia(id: string): MediaSlot {
+
   const slot = media[id];
+
   if (!slot) {
+
     throw new Error(`No media slot registered for id "${id}". Add it to content/media.ts.`);
+
   }
+
   return slot;
+
 }

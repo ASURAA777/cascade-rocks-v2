@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "@/lib/motion/gsapConfig";
 import { applyLightProgress } from "@/lib/motion/useTimeOfDay";
 
 /**
