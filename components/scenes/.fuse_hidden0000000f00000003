@@ -1,0 +1,61 @@
+"use client";
+
+import { useScrollScene } from "@/lib/motion/useScrollScene";
+import { registerSceneActivation } from "@/lib/motion/useActiveScene";
+import { getSceneById } from "@/content/scenes";
+import { CinematicType } from "@/components/primitives/CinematicType";
+import { MediaSlot } from "@/components/primitives/MediaSlot";
+import { ParallaxLayer } from "@/components/primitives/ParallaxLayer";
+
+const scene = getSceneById("table")!;
+
+export function SceneTable() {
+  const ref = useScrollScene<HTMLElement>(({ root }) => {
+    registerSceneActivation(root, "table");
+  });
+
+  return (
+    <section
+      ref={ref}
+      id="table"
+      aria-labelledby="table-heading"
+      className="relative w-full overflow-hidden bg-mist py-scene-y text-ink"
+    >
+      <div className="mx-auto max-w-6xl px-gutter">
+        <div className="text-center">
+          <CinematicType as="h2" id="table-heading" className="text-headline font-display">
+            {scene.headline}
+          </CinematicType>
+          {scene.subheadline && (
+            <p className="mt-4 text-body-lg font-body text-ink/70">{scene.subheadline}</p>
+          )}
+        </div>
+
+        <div className="relative mt-20 h-[140vh] md:h-[110vh]">
+
+          {/* TOP LEFT corner — dining hall */}
+          <ParallaxLayer speed={0.10} className="absolute top-[0%] left-[0%] w-[40%] md:w-[34%]">
+            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-xl">
+              <MediaSlot id="table.hall" sizes="(min-width: 768px) 34vw, 40vw" className="object-cover" />
+            </div>
+          </ParallaxLayer>
+
+          {/* CENTER — big hero image */}
+          <ParallaxLayer speed={0.22} className="absolute top-[12%] left-1/2 -translate-x-1/2 w-[62%] md:w-[52%]">
+            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-2xl">
+              <MediaSlot id="table.chef" sizes="(min-width: 768px) 52vw, 62vw" className="object-cover" />
+            </div>
+          </ParallaxLayer>
+
+          {/* BOTTOM RIGHT corner — valley tea view */}
+          <ParallaxLayer speed={0.36} className="absolute bottom-[0%] right-[0%] w-[42%] md:w-[34%]">
+            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-xl">
+              <MediaSlot id="table.dish" sizes="(min-width: 768px) 34vw, 42vw" className="object-cover" />
+            </div>
+          </ParallaxLayer>
+
+        </div>
+      </div>
+    </section>
+  );
+}

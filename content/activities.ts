@@ -1,14 +1,5 @@
 import type { Activity } from "@/types/content";
 
-/**
- * Estate Experiences — Scene 07. Covers the full activities list from the
- * property brief; obviously duplicative entries are merged into one
- * richer activity (Quinn Waterfall Trek into Waterfall Trek, Fresh
- * Strawberry Experience into Strawberry Farm Visit, Milking Observation
- * into Cattle Shed Visit) rather than dropped — no activity from the
- * brief is missing, each just reads as one complete memory instead of
- * two fragments of the same one (DESIGN.md §5, Scene 07).
- */
 export const activities: Activity[] = [
   {
     id: "tea-factory",
@@ -25,29 +16,11 @@ export const activities: Activity[] = [
     mediaSlot: "experiences.waterfallTrek",
   },
   {
-    id: "brook-exploration",
-    title: "Brook Exploration",
-    description: "A slow walk along the brook that feeds the estate's waterfall, shaded by forest the whole way.",
-    mediaSlot: "experiences.brook",
-  },
-  {
-    id: "jamarai-forest",
-    title: "Jamarai Mini Forest Trek",
-    description: "A short forest trek through Jamarai, canopy light overhead and birdsong the only sound.",
-    mediaSlot: "experiences.jamaraiForest",
-  },
-  {
     id: "strawberry-farm",
     title: "Strawberry Farm Visit",
     description:
       "Walk the rows of the estate's strawberry farm and pick your own — fresh, straight from the plant.",
     mediaSlot: "experiences.strawberryFarm",
-  },
-  {
-    id: "cattle-shed",
-    title: "Cattle Shed Visit",
-    description: "Visit the estate's cattle shed and watch the morning milking, an unhurried, working-farm moment.",
-    mediaSlot: "experiences.cattleShed",
   },
   {
     id: "bonfire-evenings",

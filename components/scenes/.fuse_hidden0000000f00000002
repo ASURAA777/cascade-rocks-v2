@@ -1,0 +1,69 @@
+"use client";
+
+import { useScrollScene } from "@/lib/motion/useScrollScene";
+import { registerSceneActivation } from "@/lib/motion/useActiveScene";
+import { getSceneById } from "@/content/scenes";
+import { CinematicType } from "@/components/primitives/CinematicType";
+import { MediaSlot } from "@/components/primitives/MediaSlot";
+import { ParallaxLayer } from "@/components/primitives/ParallaxLayer";
+
+const scene = getSceneById("table")!;
+
+/**
+ * Scene 06 — The Table. Three planes:
+ * - Background: full-width dining hall
+ * - Left portrait: tea-service-deck (tall portrait, left column)
+ * - Right landscape: valley-tea-view (landscape, right column, lower)
+ * Irregular overlap — each layer drifts at a different parallax speed.
+ */
+export function SceneTable() {
+  const ref = useScrollScene<HTMLElement>(({ root }) => {
+    registerSceneActivation(root, "table");
+  });
+
+  return (
+    <section
+      ref={ref}
+      id="table"
+      aria-labelledby="table-heading"
+      className="relative w-full overflow-hidden bg-mist py-scene-y text-ink"
+    >
+      <div className="mx-auto max-w-6xl px-gutter">
+        <div className="text-center">
+          <CinematicType as="h2" id="table-heading" className="text-headline font-display">
+            {scene.headline}
+          </CinematicType>
+          {scene.subheadline && (
+            <p className="mt-4 text-body-lg font-body text-ink/70">{scene.subheadline}</p>
+          )}
+        </div>
+
+        {/* Three-plane collage — irregular overlapping placement */}
+        <div className="relative mt-20 h-[130vh] md:h-[100vh]">
+
+          {/* Plane 1 — Background: dining hall, full-width, top anchor */}
+          <ParallaxLayer speed={0.06} className="absolute inset-x-0 top-0 h-[58%] w-full">
+            <div className="relative h-full w-full overflow-hidden">
+              <MediaSlot id="table.hall" sizes="100vw" className="object-cover" />
+            </div>
+          </ParallaxLayer>
+
+          {/* Plane 2 — Left portrait: tea-service-deck */}
+          <ParallaxLayer speed={0.20} className="absolute top-[14%] left-[3%] w-[36%] md:w-[30%]">
+            <div className="relative aspect-[3/4] w-full overflow-hidden shadow-xl">
+              <MediaSlot id="table.chef" sizes="(min-width: 768px) 30vw, 36vw" className="object-cover" />
+            </div>
+          </ParallaxLayer>
+
+          {/* Plane 3 — Right landscape: valley-tea-view */}
+          <ParallaxLayer speed={0.34} className="absolute top-[36%] right-[3%] w-[50%] md:w-[42%]">
+            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-xl">
+              <MediaSlot id="table.dish" sizes="(min-width: 768px) 42vw, 50vw" className="object-cover" />
+            </div>
+          </ParallaxLayer>
+
+        </div>
+      </div>
+    </section>
+  );
+}

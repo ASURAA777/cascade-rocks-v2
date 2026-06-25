@@ -6,19 +6,9 @@ import { useActiveScene } from "@/lib/motion/useActiveScene";
 import { lenisInstance } from "@/lib/motion/useLenis";
 
 interface ChromeOverlayProps {
-  /** ContextualCTA slot — wired in Milestone 7, kept as children so this
-   * component doesn't need to know about CTA state directly. */
   children?: React.ReactNode;
 }
 
-/**
- * Persistent chrome — ARCHITECTURE.md §1.4. Logo (mix-blend-difference so
- * it self-contrasts against any scene without per-stage branching),
- * progress/light-stage line (reads the same --light-progress/--scrim-color
- * vars LightProgressionLayer writes — zero extra JS), and the hidden-by-
- * default Scene Index, which also serves as a skip-navigation mechanism
- * (ARCHITECTURE.md §13).
- */
 export function ChromeOverlay({ children }: ChromeOverlayProps) {
   const [indexOpen, setIndexOpen] = useState(false);
   const activeScene = useActiveScene();
@@ -27,7 +17,6 @@ export function ChromeOverlay({ children }: ChromeOverlayProps) {
   useEffect(() => {
     if (!indexOpen) return;
     firstItemRef.current?.focus();
-
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") setIndexOpen(false);
     }
@@ -43,10 +32,6 @@ export function ChromeOverlay({ children }: ChromeOverlayProps) {
   return (
     <>
       <div className="pointer-events-none fixed inset-0 z-[var(--z-chrome)]">
-        <p className="pointer-events-auto absolute top-8 left-gutter font-display text-body text-mist mix-blend-difference">
-          Cascade Rocks
-        </p>
-
         <div
           aria-hidden="true"
           className="absolute top-1/2 right-6 h-40 w-px -translate-y-1/2 bg-mist/20"

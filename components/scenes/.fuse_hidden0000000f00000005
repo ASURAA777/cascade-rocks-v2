@@ -1,0 +1,70 @@
+"use client";
+
+import { useScrollScene } from "@/lib/motion/useScrollScene";
+import { registerSceneActivation } from "@/lib/motion/useActiveScene";
+import { getSceneById } from "@/content/scenes";
+import { CinematicType } from "@/components/primitives/CinematicType";
+import { MediaSlot } from "@/components/primitives/MediaSlot";
+import { ParallaxLayer } from "@/components/primitives/ParallaxLayer";
+
+const scene = getSceneById("table")!;
+
+/**
+ * Scene 06 — The Table.
+ * Three images in a diagonal cascade: top-left → center → bottom-right,
+ * each overlapping the corner of the previous. Parallax drift separates
+ * the planes as the user scrolls.
+ */
+export function SceneTable() {
+  const ref = useScrollScene<HTMLElement>(({ root }) => {
+    registerSceneActivation(root, "table");
+  });
+
+  return (
+    <section
+      ref={ref}
+      id="table"
+      aria-labelledby="table-heading"
+      className="relative w-full overflow-hidden bg-mist py-scene-y text-ink"
+    >
+      <div className="mx-auto max-w-6xl px-gutter">
+
+        {/* Heading */}
+        <div className="text-center">
+          <CinematicType as="h2" id="table-heading" className="text-headline font-display">
+            {scene.headline}
+          </CinematicType>
+          {scene.subheadline && (
+            <p className="mt-4 text-body-lg font-body text-ink/70">{scene.subheadline}</p>
+          )}
+        </div>
+
+        {/* Cascade composition */}
+        <div className="relative mt-16 h-[80vh] md:h-[75vh]">
+
+          {/* 1 — Top-left */}
+          <ParallaxLayer speed={0.08} className="absolute top-[0%] left-[2%] w-[38%] md:w-[34%] z-10">
+            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-xl">
+              <MediaSlot id="table.hall" sizes="(min-width: 768px) 34vw, 38vw" className="object-cover" />
+            </div>
+          </ParallaxLayer>
+
+          {/* 2 — Center, overlaps bottom-right corner of image 1 */}
+          <ParallaxLayer speed={0.20} className="absolute top-[22%] left-[22%] w-[52%] md:w-[48%] z-20">
+            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-2xl">
+              <MediaSlot id="table.chef" sizes="(min-width: 768px) 48vw, 52vw" className="object-cover" />
+            </div>
+          </ParallaxLayer>
+
+          {/* 3 — Bottom-right, overlaps bottom-right corner of image 2 */}
+          <ParallaxLayer speed={0.34} className="absolute top-[48%] right-[2%] w-[38%] md:w-[32%] z-30">
+            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-xl">
+              <MediaSlot id="table.dish" sizes="(min-width: 768px) 32vw, 38vw" className="object-cover" />
+            </div>
+          </ParallaxLayer>
+
+        </div>
+      </div>
+    </section>
+  );
+}
